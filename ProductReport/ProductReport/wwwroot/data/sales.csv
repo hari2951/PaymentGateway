@@ -1,0 +1,11 @@
+Segment,Country,Product,Discount Band,Units Sold,Manufacturing Price,Sale Price,Date
+Government,Canada,Carretera,None,1618.5,3.00,20.00,1/1/2024
+Government,Germany,Carretera,None,1321,3.00,20.00,1/2/2024
+Midmarket,France,Carretera,None,2178,3.00,15.00,1/3/2024
+Government,Mexico,Carretera,None,888,3.00,15.00,1/4/2024
+Government,Germany,Carretera,None,2470,3.00,350.00,1/5/2024
+Channel Partners,Canada,Carretera,None,1523,3.00,125.00,1/6/2024
+Midmarket,Germany,Carretera,None,921,3.00,15.00,1/7/2024
+Channel Partners,France,Carretera,None,2518,3.00,125.00,1/8/2024
+Channel Partners,Mexico,Carretera,None,1899,3.00,125.00,1/9/2024
+Channel Partners,Germany,Carretera,None,1545,3.00,15.00,1/10/2024 

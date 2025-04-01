@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">ProductReport</a>
+        <a class="navbar-brand" href="">Product Report</a>
     </div>
 </div>
 
@@ -9,8 +9,8 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            <NavLink class="nav-link" href="sales" Match="NavLinkMatch.All">
+                <span class="bi bi-graph-up" aria-hidden="true"></span> Sales Report
             </NavLink>
         </div>
 
@@ -27,4 +27,13 @@
         </div>
     </nav>
 </div>
+
+@code {
+    private bool collapseNavMenu = true;
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
 

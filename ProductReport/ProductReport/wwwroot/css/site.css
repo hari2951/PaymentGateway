@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --background-color: #f8f9fa;
+    --text-color: #2c3e50;
+    --border-color: #dee2e6;
+}
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+main {
+    flex: 1;
+}
+
+.sidebar {
+    background-image: linear-gradient(180deg, var(--primary-color) 0%, #2980b9 70%);
+    width: 250px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.top-row {
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
+    justify-content: flex-start;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.top-row h3 {
+    margin: 0;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.content {
+    padding: 1.5rem;
+}
+
+/* NavMenu Styles */
+.navbar-brand {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: white !important;
+    padding: 1rem;
+}
+
+.nav-item {
+    padding: 0.5rem 0;
+}
+
+.nav-link {
+    color: #fff !important;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+}
+
+/* Table Styles */
+.table {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-color);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.table thead th:hover {
+    background-color: #e9ecef;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Form Controls */
+.form-control, .form-select {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Button Styles */
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+/* Summary Cards */
+.summary-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.summary-card h6 {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.summary-card h3 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+/* Error UI */
+#blazor-error-ui {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    bottom: 0;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    display: none;
+    left: 0;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .reload {
+    color: #0366d6;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    float: right;
+    margin-right: 1rem;
+} 
