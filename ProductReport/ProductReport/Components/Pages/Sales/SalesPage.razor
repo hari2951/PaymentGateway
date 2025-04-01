@@ -1,8 +1,11 @@
 @page "/sales"
-@using Microsoft.AspNetCore.Components.Forms
+@rendermode InteractiveServer
+
 @using ProductReport.Features.Sales.ViewModels
-@using ProductReport.Features.Sales.Models
 @inject SalesViewModel ViewModel
+@implements IDisposable
+
+<PageTitle>Sales Report</PageTitle>
 
 <div class="container-fluid">
     <h2 class="mb-4">Sales Report</h2>
@@ -12,8 +15,26 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Upload Sales Data</h5>
-                    <InputFile OnChange="@OnFileSelected" class="form-control" accept=".csv" />
-                    <button class="btn btn-primary mt-2" @onclick="@LoadDefaultData">Load Default Data</button>
+                    <div class="d-flex gap-3 align-items-center">
+                        <InputFile OnChange="@OnFileSelected" class="form-control" accept=".csv" disabled="@ViewModel.IsLoading" />
+                        <button class="btn btn-primary" @onclick="@LoadDefaultData" disabled="@ViewModel.IsLoading">
+                            @if (ViewModel.IsLoading)
+                            {
+                                <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                                <span>Loading...</span>
+                            }
+                            else
+                            {
+                                <span>Load Sample Data</span>
+                            }
+                        </button>
+                    </div>
+                    @if (!string.IsNullOrEmpty(ViewModel.ErrorMessage))
+                    {
+                        <div class="alert alert-danger mt-3" role="alert">
+                            @ViewModel.ErrorMessage
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -57,7 +78,7 @@
                     <div class="card bg-light">
                         <div class="card-body">
                             <h6>Total Units Sold</h6>
-                            <h3>@ViewModel.TotalUnitsSold.ToString("N0")</h3>
+                            <h3>@ViewModel.TotalUnitsSold</h3>
                         </div>
                     </div>
                 </div>
@@ -95,14 +116,30 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th @onclick="@(() => ViewModel.SortBy("Date"))" style="cursor: pointer">Date</th>
-                    <th @onclick="@(() => ViewModel.SortBy("Segment"))" style="cursor: pointer">Segment</th>
-                    <th @onclick="@(() => ViewModel.SortBy("Country"))" style="cursor: pointer">Country</th>
-                    <th @onclick="@(() => ViewModel.SortBy("Product"))" style="cursor: pointer">Product</th>
-                    <th @onclick="@(() => ViewModel.SortBy("UnitsSold"))" style="cursor: pointer">Units Sold</th>
-                    <th @onclick="@(() => ViewModel.SortBy("ManufacturingPrice"))" style="cursor: pointer">Manufacturing Price</th>
-                    <th @onclick="@(() => ViewModel.SortBy("SalePrice"))" style="cursor: pointer">Sale Price</th>
-                    <th @onclick="@(() => ViewModel.SortBy("ProfitLoss"))" style="cursor: pointer">Profit/Loss</th>
+                    <th @onclick="@(() => ViewModel.SortBy("Date"))" style="cursor: pointer">
+                        Date <i class="bi @ViewModel.GetSortIcon("Date")"></i>
+                    </th>
+                    <th @onclick="@(() => ViewModel.SortBy("Segment"))" style="cursor: pointer">
+                        Segment <i class="bi @ViewModel.GetSortIcon("Segment")"></i>
+                    </th>
+                    <th @onclick="@(() => ViewModel.SortBy("Country"))" style="cursor: pointer">
+                        Country <i class="bi @ViewModel.GetSortIcon("Country")"></i>
+                    </th>
+                    <th @onclick="@(() => ViewModel.SortBy("Product"))" style="cursor: pointer">
+                        Product <i class="bi @ViewModel.GetSortIcon("Product")"></i>
+                    </th>
+                    <th @onclick="@(() => ViewModel.SortBy("UnitsSold"))" style="cursor: pointer">
+                        Units Sold <i class="bi @ViewModel.GetSortIcon("UnitsSold")"></i>
+                    </th>
+                    <th @onclick="@(() => ViewModel.SortBy("ManufacturingPrice"))" style="cursor: pointer">
+                        Manufacturing Price <i class="bi @ViewModel.GetSortIcon("ManufacturingPrice")"></i>
+                    </th>
+                    <th @onclick="@(() => ViewModel.SortBy("SalePrice"))" style="cursor: pointer">
+                        Sale Price <i class="bi @ViewModel.GetSortIcon("SalePrice")"></i>
+                    </th>
+                    <th @onclick="@(() => ViewModel.SortBy("ProfitLoss"))" style="cursor: pointer">
+                        Profit/Loss <i class="bi @ViewModel.GetSortIcon("ProfitLoss")"></i>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -113,9 +150,9 @@
                         <td>@record.Segment</td>
                         <td>@record.Country</td>
                         <td>@record.Product</td>
-                        <td>@record.UnitsSold.ToString("N0")</td>
-                        <td>@record.ManufacturingPrice.ToString("C")</td>
-                        <td>@record.SalePrice.ToString("C")</td>
+                        <td>@record.UnitsSold</td>
+                        <td>@record.ManufacturingPrice</td>
+                        <td>@record.SalePrice</td>
                         <td class="@(record.ProfitLoss >= 0 ? "text-success" : "text-danger")">
                             @record.ProfitLoss.ToString("C")
                         </td>
@@ -127,13 +164,23 @@
 </div>
 
 @code {
+    protected override void OnInitialized()
+    {
+        ViewModel.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ViewModel.OnChange -= StateHasChanged;
+    }
+
     private async Task OnFileSelected(InputFileChangeEventArgs e)
     {
         await ViewModel.ProcessUploadedFileAsync(e.File);
     }
 
-    private async Task LoadDefaultData()
+    private void LoadDefaultData()
     {
-        await ViewModel.LoadDefaultDataAsync();
+        ViewModel.LoadDefaultData();
     }
 } 

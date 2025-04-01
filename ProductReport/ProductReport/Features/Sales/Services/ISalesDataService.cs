@@ -5,7 +5,7 @@ namespace ProductReport.Features.Sales.Services
 {
     public interface ISalesDataService
     {
-        Task<List<SalesRecord>> GetDefaultSalesDataAsync();
-        Task<List<SalesRecord>> ProcessUploadedFileAsync(IBrowserFile file);
+        IList<SalesRecord> GetDefaultSalesData();
+        Task<IList<SalesRecord>>  ProcessUploadedFileAsync(IBrowserFile file);
     }
 } 
