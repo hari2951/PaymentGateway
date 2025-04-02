@@ -3,6 +3,7 @@ using ProductReport.Configurations;
 using ProductReport.Features.Sales.Models;
 using ProductReport.Features.Sales.Services;
 using ProductReport.Features.Sales.ViewModels;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,5 +37,8 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
 
 app.Run();

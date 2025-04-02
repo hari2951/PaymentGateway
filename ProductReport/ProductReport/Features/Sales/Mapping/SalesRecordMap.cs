@@ -16,8 +16,8 @@ namespace ProductReport.Features.Sales.Mapping
             Map(m => m.UnitsSold)
                 .Name("Units Sold")
                 .TypeConverter<DecimalSanitizer>();
-            Map(m => m.ManufacturingPrice).Name("Manufacturing Price");
-            Map(m => m.SalePrice).Name("Sale Price");
+            Map(m => m.ManufacturingPrice).Name("Manufacturing Price").TypeConverter<PriceSanitizer>();
+            Map(m => m.SalePrice).Name("Sale Price").TypeConverter<PriceSanitizer>();
         }
     }
 }

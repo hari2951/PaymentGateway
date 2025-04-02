@@ -45,7 +45,7 @@
         <div class="col-md-4">
             <select class="form-select" @bind="ViewModel.SelectedSegment">
                 <option value="">All Segments</option>
-                @foreach (var segment in ViewModel.Segments)
+                @foreach (var segment in ViewModel.Segments.Where(p => !string.IsNullOrWhiteSpace(p)))
                 {
                     <option value="@segment">@segment</option>
                 }
@@ -54,7 +54,7 @@
         <div class="col-md-4">
             <select class="form-select" @bind="ViewModel.SelectedCountry">
                 <option value="">All Countries</option>
-                @foreach (var country in ViewModel.Countries)
+                @foreach (var country in ViewModel.Countries.Where(p => !string.IsNullOrWhiteSpace(p)))
                 {
                     <option value="@country">@country</option>
                 }
@@ -63,7 +63,7 @@
         <div class="col-md-4">
             <select class="form-select" @bind="ViewModel.SelectedProduct">
                 <option value="">All Products</option>
-                @foreach (var product in ViewModel.Products)
+                @foreach (var product in ViewModel.Products.Where(p => !string.IsNullOrWhiteSpace(p)))
                 {
                     <option value="@product">@product</option>
                 }
@@ -152,7 +152,7 @@
                         <td>@record.Country</td>
                         <td>@record.Product</td>
                         <td>@record.UnitsSold</td>
-                        <td>@PriceUtils.Sanitize(record.ManufacturingPrice)</td>
+                        <td>@record.ManufacturingPrice</td>
                         <td>@record.SalePrice</td>
                         <td class="@(record.ProfitLoss >= 0 ? "text-success" : "text-danger")">
                             @record.ProfitLoss.ToString("C")
