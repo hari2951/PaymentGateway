@@ -37,7 +37,9 @@ namespace ProductReport.Features.Sales.Services
                 {
                     var record = csv.GetRecord<SalesRecord>();
                     if (record != null)
+                    {
                         records.Add(record);
+                    }
                 }
                 catch (Exception ex)
                 {
