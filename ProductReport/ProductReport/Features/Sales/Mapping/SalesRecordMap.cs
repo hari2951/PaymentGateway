@@ -8,7 +8,7 @@ namespace ProductReport.Features.Sales.Mapping
     {
         public SalesRecordMap()
         {
-            Map(m => m.Date).Name("Date").TypeConverterOption.Format("MM/dd/yyyy");
+            Map(m => m.Date).Name("Date").TypeConverter(new DateSanitizer("MM/dd/yyyy"));
             Map(m => m.Segment).Name("Segment");
             Map(m => m.Country).Name("Country");
             Map(m => m.Product).Name("Product");

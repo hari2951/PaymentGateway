@@ -2,6 +2,7 @@
 @rendermode InteractiveServer
 
 @using ProductReport.Features.Sales.ViewModels
+@using ProductReport.Features.Sales.Utilities
 @inject SalesViewModel ViewModel
 @implements IDisposable
 
@@ -151,7 +152,7 @@
                         <td>@record.Country</td>
                         <td>@record.Product</td>
                         <td>@record.UnitsSold</td>
-                        <td>@record.ManufacturingPrice</td>
+                        <td>@PriceUtils.Sanitize(record.ManufacturingPrice)</td>
                         <td>@record.SalePrice</td>
                         <td class="@(record.ProfitLoss >= 0 ? "text-success" : "text-danger")">
                             @record.ProfitLoss.ToString("C")
