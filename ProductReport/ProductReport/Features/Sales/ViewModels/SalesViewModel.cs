@@ -95,6 +95,7 @@ namespace ProductReport.Features.Sales.ViewModels
                 if (_selectedSegment != value)
                 {
                     _selectedSegment = value;
+                    CurrentPage = 1;
                     NotifyStateChanged();
                 }
             }
@@ -108,6 +109,7 @@ namespace ProductReport.Features.Sales.ViewModels
                 if (_selectedCountry != value)
                 {
                     _selectedCountry = value;
+                    CurrentPage = 1;
                     NotifyStateChanged();
                 }
             }
@@ -121,6 +123,7 @@ namespace ProductReport.Features.Sales.ViewModels
                 if (_selectedProduct != value)
                 {
                     _selectedProduct = value;
+                    CurrentPage = 1;
                     NotifyStateChanged();
                 }
             }
