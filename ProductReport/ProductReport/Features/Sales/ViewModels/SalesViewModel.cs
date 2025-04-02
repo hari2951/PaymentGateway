@@ -20,11 +20,72 @@ namespace ProductReport.Features.Sales.ViewModels
         private bool _sortAscending = true;
         private readonly UploadSettings _uploadSettings = uploadSettings.Value ?? new UploadSettings();
 
+        // Pagination properties
+        private int _pageSize = 10;
+        private int _currentPage = 1;
+        public int CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                if (_currentPage != value)
+                {
+                    _currentPage = value;
+                    NotifyStateChanged();
+                }
+            }
+        }
+
+        public int PageSize
+        {
+            get => _pageSize;
+            set
+            {
+                if (_pageSize != value)
+                {
+                    _pageSize = value;
+                    _currentPage = 1; // Reset to first page when changing page size
+                    NotifyStateChanged();
+                }
+            }
+        }
+
+        public int TotalPages => (int)Math.Ceiling(GetFilteredAndSortedRecords().Count / (double)PageSize);
+        public bool HasPreviousPage => CurrentPage > 1;
+        public bool HasNextPage => CurrentPage < TotalPages;
+
+        public List<SalesRecord> SalesRecords => GetFilteredAndSortedRecords()
+            .Skip((CurrentPage - 1) * PageSize)
+            .Take(PageSize)
+            .ToList();
+
+        public void NextPage()
+        {
+            if (HasNextPage)
+            {
+                CurrentPage++;
+            }
+        }
+
+        public void PreviousPage()
+        {
+            if (HasPreviousPage)
+            {
+                CurrentPage--;
+            }
+        }
+
+        public void GoToPage(int page)
+        {
+            if (page >= 1 && page <= TotalPages)
+            {
+                CurrentPage = page;
+            }
+        }
+
         public bool IsLoading { get; private set; }
         public string? ErrorMessage { get; private set; }
         public bool HasData => _salesRecords.Any();
-
-        public List<SalesRecord> SalesRecords => GetFilteredAndSortedRecords();
 
         public string SelectedSegment
         {
