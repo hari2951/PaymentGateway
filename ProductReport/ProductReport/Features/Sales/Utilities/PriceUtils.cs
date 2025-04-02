@@ -16,7 +16,9 @@ namespace ProductReport.Features.Sales.Utilities
         public static decimal Sanitize(string priceString)
         {
             if (string.IsNullOrWhiteSpace(priceString))
+            {
                 return 0;
+            }
 
             var cleaned = priceString.Trim();
 
@@ -31,12 +33,7 @@ namespace ProductReport.Features.Sales.Utilities
                 cleaned = cleaned.Replace(",", "");
             }
 
-            if (decimal.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out var price))
-            {
-                return price;
-            }
-
-            return 0;
+            return decimal.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out var price) ? price : 0;
         }
     }
 }

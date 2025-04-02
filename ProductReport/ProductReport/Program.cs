@@ -1,5 +1,6 @@
 using ProductReport.Components;
 using ProductReport.Configurations;
+using ProductReport.Features.Sales.Models;
 using ProductReport.Features.Sales.Services;
 using ProductReport.Features.Sales.ViewModels;
 
@@ -17,6 +18,9 @@ builder.Services.Configure<UploadSettings>(
 
 builder.Services.AddScoped<ISalesDataService, SalesDataService>();
 builder.Services.AddScoped<SalesViewModel>();
+
+builder.Services.AddScoped<ICsvParser<SalesRecord>, SalesCsvParser>();
+builder.Services.AddScoped<IFileReaderService, FileReaderService>();
 
 var app = builder.Build();
 
